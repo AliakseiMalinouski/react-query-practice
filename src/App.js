@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { useEffect } from 'react';
+
+const getData = async () => {
+  try {
+    const res = await fetch("https://v6.exchangerate-api.com/v6/5f6c169eb629a374b98a6f66/latest/USD")
+    if(res.ok) {
+      const data = await res.json();
+      console.log(data)
+      return data
+    }
+  }
+  catch(e) {
+    console.log(e)
+  }
+}
 
 function App() {
+
+  const data = useQuery('valute', getData);
+
+  
+  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
     </div>
   );
 }
